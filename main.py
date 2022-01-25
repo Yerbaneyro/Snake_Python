@@ -16,7 +16,7 @@ dis_width = 600
 dis_height = 400
 
 dis = pygame.display.set_mode((dis_width, dis_height))
-pygame.display.set_caption('PySnake v0.1.0')
+pygame.display.set_caption('PySnake v0.2.0')
 
 clock = pygame.time.Clock()
 
@@ -24,6 +24,7 @@ speed = 15
 snake_block = 10
 
 game_over_text = pygame.font.SysFont(None, 90)
+score_text = pygame.font.SysFont(None, 40)
 
 
 def snake(snake_block, snake_list):
@@ -34,6 +35,10 @@ def snake(snake_block, snake_list):
 def message(msg, color):
     mesg = game_over_text.render(msg, True, color)
     dis.blit(mesg, [dis_width/2 - 190, dis_height/2 - 150])
+
+def score(score):
+    value = score_text.render("Score: " + str(score), True, red)
+    dis.blit(value, [0, 0])
 
 
 def gameLoop():
@@ -57,6 +62,7 @@ def gameLoop():
         while game_close == True:
             dis.fill(green)
             message("GAME OVER", black)
+            score(len_of_snake - 1)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -106,13 +112,14 @@ def gameLoop():
                 game_close = True
 
         snake(snake_block, snake_list)
+        score(len_of_snake - 1)
 
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
             foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
             foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
-            len_of_snake += 1
+            len_of_snake += 4
 
         clock.tick(speed)
 
