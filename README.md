@@ -1,6 +1,6 @@
 # Snake_Python
 
-##Description:
+## Description:
 Simple Snake game created with Python with help of open source library PyGame. 
 
 ## Requirements:
